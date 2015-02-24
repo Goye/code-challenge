@@ -14,18 +14,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/anonymous node/sails user/r3l-node-stack.git"
+    "url": "git clone https://Goye-says@bitbucket.org/Goye-says/code-challenge.git"
   },
   "author": "Goye",
   "license": "",
-  "devDependencies": {
-    "gulp": "^3.8.8",
-    "gulp-mocha": "^1.1.0",
-    "gulp-util": "^3.0.1",
-    "mocha": "^2.0.0",
-    "should": "^4.0.4"
-  },
   "bin":{
-    "C": "canvasService.js"
+    "C": "canvas.js",
+    "L": "line.js",
+    "R": "rectangle.js",
+    "B": "drawService.js",
+    "Q": "quit.js"
   } 
 }
