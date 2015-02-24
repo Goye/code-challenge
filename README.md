@@ -1,295 +1,128 @@
-Welcome to your tutorial repository!
-================
-Learn how to use Git and Bitbucket with either SourceTree, one of the best Git clients available, or using Git from the command line. Whichever you choose you will learn how set up Git, clone this repository locally. Then learn how to make and commit a change locally and push that change back to Bitbucket.
+Plarity API
 
-____
+[Overview](https://docs.google.com/a/rokk3rlabs.com/spreadsheets/d/1BdN73c7h_Nvkpf6Aarc84EcOOg-O8CWPche9AZTvHGY/edit#gid=1614137363)
 
-## Start here
-Choose either SourceTree, Atlassian's Git client, or the command line to learn source control using Bitbucket and Git. 
+[API](https://docs.google.com/a/rokk3rlabs.com/spreadsheets/d/1BdN73c7h_Nvkpf6Aarc84EcOOg-O8CWPche9AZTvHGY/edit#gid=1388506100)
 
-### Use [SourceTree Atlassian's Git client](#markdown-header-sourcetree) for Windows and Mac
+[Design](https://www.dropbox.com/sh/5e6jxjok58pnrt4/AAC0WhYl-tEmFuEdxH37dzAya/Web/UI%20Design?dl=0)
 
-![Looking at the repository in SourceTree](https://confluence.atlassian.com/download/attachments/304578655/sourcetree-gui-small.png)
+[PSD](https://www.dropbox.com/sh/spk8fd7u52j89cq/AAAUu1XtkRwW7F4VMLexseuwa?dl=0)
 
-### Use [Git from the command line](#markdown-header-command-line) for Windows, Mac, and Linux
 
+## Included Awesomeness
 
-**Finally**, if you want a complete end to end tutorial: See our [Bitbucket 101](https://confluence.atlassian.com/x/cgozDQ). 
+These are all globals. No need to `npm install / require`.
 
------------------
-### Collaboration is the core of Git
-Unlike SVN, Git makes no distinction between the working copy and the central repository—they are all full-fledged Git repositories.
+`_` - [lodash](https://lodash.com/)
 
-![Git to SVN comparison](https://confluence.atlassian.com/download/attachments/304578655/git-tutorial-basics-clone-repotorepocollaboration.png)
+`async` - [async](https://github.com/caolan/async)
 
-Git's ability to communicate with remote repositories is the foundation of every Git-based collaboration workflow. To learn more about Git and Git workflows see, [Atlassian's Git site](https://www.atlassian.com/git/).
+`log` - [captains-log](https://github.com/balderdashy/captains-log)
 
+`req` - [request](https://github.com/mikeal/request)
 
-- - -
-## SourceTree 
-Download, install and configure SourceTree. Source tree is Atlassian's Git GUI client and one of the most popular on the market. 
- 
-This section contains the following tasks: 
 
-* [Install and configure SourceTree](#markdown-header-install-and-configure-sourcetree): Download, install, and configure SourceTree. 
-* [Clone repository locally](#markdown-header-clone-repository-locally): Learn how to clone the bucket-o-sand to your local system. 
-	* [Clone from SourceTree welcome wizard](#markdown-header-clone-from-sourcetree-welcome-wizard)
-	* [Clone from Bitbucket](#markdown-header-clone-from-bitbucket)
-* [Inspect your repository](#markdown-header-inspect-your-repository)
-	* [Repository in SourceTree](#markdown-header-repository-in-sourcetree)
-	* [Repository in Bitbucket](#markdown-header-repository-in-bitbucket)
-* [Make a commit and push a change](#markdown-header-make-a-commit-and-push-a-change)
+## To Run Locally
 
+````
+git clone git@bitbucket.org/rokk3rlabs/plarity-api.git
+npm install
+bower install
+gulp server
+````
 
-####Install and configure SourceTree
+You need data for Plarity to function. While we would recommend just pointing at a server, instructions for installing the data can be found at `docs/data/import.md`
 
-1. Go to [SourceTree](http://sourcetreeapp.com) and click **Download SourceTree Free**
-2. Open the downloaded file and click **Run**
-3. Accept the default settings by clicking **Next** at each screen. (Windows only: Follow the instructions for installing .Net Framework if prompted.)
-4. Select a location to install SourceTree or accept the default. 
-5. Click **Finish** (Mac) or **Install** (Windows).
+## Included Awesomeness
 
-The SourceTree welcome wizard opens. Select **I agree to the license agreement** and click **Continue**. 
+These are all globals. No need to `npm install / require`.
 
-![Welcome wizard open page](https://confluence.atlassian.com/download/attachments/304578655/soucetree-welcomewiz-screen1.png)
- 
-Fantastic! Now you have SourceTree installed! Next you'll complete SourceTree configuration. 
+`_` - [lodash](https://lodash.com/)
 
-**Configure SourceTree**
+`async` - [async](https://github.com/caolan/async)
 
-* SourceTree will install Git, if you do not already have a version installed. 
+`log` - [captains-log](https://github.com/balderdashy/captains-log)
 
-![Git install window](https://confluence.atlassian.com/download/attachments/304578655/sourcetree-install-git.png)
+`request` - [request](https://github.com/mikeal/request)
 
-The welcome wizard will help you add an account. 
+## Gulp Build System
 
-* Select Bitbucket in the Account **A** section, and enter the same login information you use for your Bitbucket account in the Username and Password fields **B**. 
+Run `gulp` to see available commands.
 
-![Set up account window](https://confluence.atlassian.com/download/attachments/304578655/sourcetree-setup-account.png)
+Edit script or html file paths in `gulpfile.conf.js`.
 
-* Click **No** to decline SSH keys for the moment. If you have SSH keys you can add them later. 
+Include `<!-- #insertVersion -->` in your html to insert the version from package.json. 
 
-Finally, you can [Clone from SourceTree welcome wizard](#markdown-header-clone-from-sourcetree-welcome-wizard) in the next section. 
+## Testing
+Run tests with `gulp test` or `gulp watch`.
 
+Or individually
 
------
+`gulp test:api` `gulp test:unit` `gulp test:e2e`
 
-##Clone repository locally
-Next we'll get the repository to your local system. The git clone copies an existing Git repository as its own full-fledged Git repository. Cloning also creates a remote connection called origin pointing back to the original repository.
+## Knowledge Repository
 
-![Git clone](https://confluence.atlassian.com/download/attachments/304578655/git-tutorial-basics-clone.png)
+Find all in project of the below (including brackets) to find out where the following are enabled...
 
-###Clone from SourceTree welcome wizard
-If your installing SourceTree you can clone your repository during the configuration process. 
+[@test] - Should over Mocha on Karma [docs](docs/test.md)
 
-1. Select your repository **1** from the list in the welcome wizard. 
-2. Confirm the destination folder **2**, or select a new one. 
-3. Click **Ok**. 
+## Stack Objectives
 
-![welcome wizard clone dialog](https://confluence.atlassian.com/download/attachments/304578655/sourcetree-setup-selectrepo.png)
+1. Deploy a Default Node.js Stack that is flexible and modular.
+1. Reduce Build Time over development lifecycles of several projects.
+1. Reduce Bugs in future builds.
+1. Build API which can be used by both a Web & Mobile Application simultaneously.
 
-Fantastic!! Now you have a clone of the repository on your local system and are ready to work. Next, you can [Inspect your repository](#markdown-header-inspect-your-repository)
+## Authorization in r3l-node-stack
 
-###Clone from Bitbucket
-Learn how to clone a repository starting from Bitbucket to your local system using SourceTree.
+1. send post request to /login that should contain username/password in the body
+1. the response should contain access token if username/passowrd are valid
+1. add header.authorization = 'bearer ' + access_token to your next request
+1. now you will be able to access to restricted resources like 'user/account' if you don't set the access token should get 401 error
 
-1. Open the sidebar navigation by clicking on the **>>** symbol.
-2. Click **Clone** *A*, then click **Clone in SourceTree** *B*.  
+## Stack Technologies
 
-![Clone process](https://confluence.atlassian.com/download/attachments/304578655/tutorial-clone-sourcetree1.png)
+* **Sails.js** - Sails.js makes it easy to build custom, enterprise-grade Node.js apps. It is designed to mimic the MVC pattern of frameworks like Ruby on Rails, but with support for the requirements of modern apps: data-driven APIs with scalable, service-oriented architecture. It's especially good for building chat, realtime dashboards, or multiplayer games.
+* **Sails Waterline** - Waterline is a brand new kind of storage and retrieval engine. It provides a uniform API for accessing stuff from different kinds of databases, protocols, and 3rd party APIs. That means you write the same code to get and store things like users, whether they live in Redis, mySQL, LDAP, MongoDB, or Postgres.
+* **Passport** - Passport is authentication middleware for Node. It is designed to serve a singular purpose: authenticate requests. When writing modules, encapsulation is a virtue, so Passport delegates all other functionality to the application. This separation of concerns keeps code clean and maintainable, and makes Passport extremely easy to integrate into an application.
+* **Oauth2-provider** -  OAuth2 servers (providers) that support server-side (code) and client-side (token) OAuth flows.
+It's very customizable, so you can (and currently, must) take care of OAuth token storage and client lists. In the future, a Mongo or Redis backed abstraction will be provided so you don't need to care about any kind of storage at all.
+* **Angular** - AngularJS is an open-source web application framework, maintained by Google and community, that assists with creating single-page applications, one-page web applications that only require HTML, CSS, and JavaScript on the client side.
+* **Angular-UI-Router** - AngularUI Router is a routing framework for AngularJS, which allows you to organize the parts of your interface into a state machine. Unlike the $route service in the Angular ngRoute module, which is organized around URL routes, UI-Router is organized around states, which may optionally have routes, as well as other behavior, attached.
+* **Angular-Resource** - A factory which creates a resource object that lets you interact with RESTful server-side data sources.
+The returned resource object has action methods which provide high-level behaviors without the need to interact with the low level $http service.
+Requires the ngResource module to be installed.
+* **connect-ensure-login** This middleware ensures that a user is logged in. If a request is received that is unauthenticated, the request will be redirected to a login page. The URL will be saved in the session, so the user can be conveniently returned to the page that was originally requested.
+* **passport-facebook** Passport strategy for authenticating with Facebook using the OAuth 2.0 API.
+ This module lets you authenticate using Facebook in your Node.js applications. By plugging into Passport, Facebook authentication can be easily and unobtrusively integrated into any application or framework that supports Connect-style middleware, including Express.
+* **passport-google-oauth** Passport strategies for authenticating with Google using OAuth 1.0a and OAuth 2.0.
+This module lets you authenticate using Google in your Node.js applications. By plugging into Passport, Google authentication can be easily and unobtrusively integrated into any application or framework that supports Connect-style middleware, including Express.
+* **passport-linkedin** Passport strategy for authenticating with LinkedIn using the OAuth 1.0a API.
+This module lets you authenticate using LinkedIn in your Node.js applications. By plugging into Passport, LinkedIn authentication can be easily and unobtrusively integrated into any application or framework that supports Connect-style middleware, including Express.
+* **passport-twitter** Passport strategy for authenticating with Twitter using the OAuth 1.0a API.
+This module lets you authenticate using Twitter in your Node.js applications. By plugging into Passport, Twitter authentication can be easily and unobtrusively integrated into any application or framework that supports Connect-style middleware, including Express.
 
-**NOTE** For Mac you will be asked to launch an application, click **OK** to continue.
+## Use Oauth 2 Provider from 3-party
+the url should be like this
 
-This will prompt SourceTree to open the clone dialog, as shown in the following example: 
+http://localhost:1337/oauth/authorize?client_id=1&redirect_uri=http://foo.com/&response_type=token
 
-* Microsoft Windows **A**  
-* Macintosh **B** 
+where:
 
-![Clone dialog](https://confluence.atlassian.com/download/attachments/304578655/tutorial-clone-step2.png)
+* client_id is the application that you want to grant him access to your website
 
-Check the destination path and modify it if you wish to place your repository file in a different directory. 
+* redirect_uri will redirect to this url in the user accept on give the app access to his information
 
-You might want to create a directory specifically for your repositories: 
-	/repositories/bucket-o-sand 
-	
+* response_type token to generate access token and send it with callback
+Note: it's accept any username/password (need to work on sign up)
 
+## Before You Start -- Remember
 
-----
-##Inspect your repository
-Let's take a look around your repository in both Bitbucket and SourceTree.
+1. Document Your Code
+1. Identify Reusable Code and Isolate it
+1. Use a Standard/Best Practices for Node.js & AngularJS
 
-####Repository in SourceTree
-The files and titles in your repository might be a bit different, but the basics are the same. 
+==============
+*R3L Node Stack* is a fullstack javascript framework - which simplifies and accelerates API platform development.
 
-![Looking at the repository in SourceTree](https://confluence.atlassian.com/download/attachments/304578655/sourcetree_gui.png)
-
-**1** Repository bookmarks: displays a list of all the repositories you have listed. You can double click a bookmarked repository to open it in an active tab.
-
-**2** Active repository tab: you can have many repositories open at once, each tab lets you view a different repository. In this example *working copy* is selected, so in the next pane you can see a list of the files in the working copy of this repository. 
-
-**3** View selection: in this pane *working copy* you can choose to view only the files in a particular state (such as: All, Modified, Clean). 
-
-**4** Working copy and Staged changes: here you can see the files in the active view (based on the selection in 3) and drag changed files from working into staged to create a change set to commit.
-
-**5** Currently selected file: you can see the diff view of a selected file in the working copy or staged area. 
-
-####Repository in Bitbucket
-Your repository will have some differences but, again, the basics are the same. The view in the following example has the sidebar expanded press [ to expand the sidebar. 
-
-![Looking at a repository in Bitbucket](https://confluence.atlassian.com/download/attachments/304578655/tutorial-sandbucket-bitbucket-reposview.png?)
-
-**A** Actions: all the most common actions are here, create a clone, branch, pull request, etc... 
-
-**B** Navigation: this is where you can get to all the things in Bitbucket (such as: source code, list of commits, list of branches). 
-
-**C** README: The view in the preceding example is on the *Overview* page where you can configure your own README using markdown or plain text.
-
-**D** Recent activity: lists the most recent commits, pushes, merges, and pull request activity. 
-
-----
-##Make a commit and push a change 
-Now your ready to make a change, add that change to your local repository, and push the change to your remote Bitbucket repository.
-
-####Open a file from SourceTree
-A simple thing like selecting and opening a file from the source control UI can make things move quicker. 
-
-1. Select **All** from view selection menu. 
-2. Select the 'sample.html' file, then right click and select **Show in Explorer** (Windows). Or click *...* then select **Show in Finder** (Mac)
-3. Using your favorite editor, edit the `sample.html` file.
-4. Change the heading from *My First File* to *Playing in the Sand*.
-5. Save and close the file. 
-
-####Commit the change in SourceTree
-Now you've made a change locally and are ready to go through the git process of adding that change to the project history locally.
-
-The 'git add' moves changes from the working directory to the staging area. This gives you the opportunity to prepare a set of changes (a snapshot) before committing it to the official history.
-
-![Git add command](https://confluence.atlassian.com/download/attachments/304578655/git-tutorial-basics-add.png)
-
-The git commit takes the staged snapshot and commits it to the project history. Combined with git add, this defines the basic workflow for all Git users.
-
-![Git commit](https://confluence.atlassian.com/download/attachments/304578655/git-tutorial-basics-commit.png)
-
-Let's do that in SourceTree
-![Modified file in SourceTree](https://confluence.atlassian.com/download/attachments/304578655/tutorial-sourcetree-changedfile.png)
-
-1. Identify the changed file **A** in SourceTree by noting the change in color and from a checkmark to an ellipsis, as shown in the following example. 
-2. Click and drag the `sample.html` **A** that file to the *Staged files* **B** area. This action is the same as the 'git add' or 'git stage' command. 
-3. Click **Commit** from the [actions menu](#markdown-header-push-the-change-to-bitbucket) in SourceTree. 
-4. Add a commit message **C**, then click **Commit**.
-
-Great! Now the snapshot of your change has been added to your local project history. 
-
-####Push the change to Bitbucket 
-The last thing we'll do is push that change to Bitbucket. 
- 
-![SouceTree toolbar with one item highlighted in the push action](https://confluence.atlassian.com/download/attachments/304578655/sourcetree-toolbar-push1.png)
-
-Click **Push** from the toolbar. You'll notice there is a *1* highlighted in the **Push** action. This is the number of commits ready to be pushed to the remote repository, Bitbucket in this case. 
-
-The push dialog opens. Review the settings and click **Ok**.  
-
-![SourceTree push dialog](https://confluence.atlassian.com/download/attachments/304578655/sourcetree-push-dialog.png)
-
-Pushing lets you move a local branch or series of commits to another repository, which serves as a convenient way to publish contributions. This is like svn commit, but it sends a series of commits instead of a single changeset.
-
-![Push graphic](https://confluence.atlassian.com/download/attachments/304578655/git-tutorial-remote-repositories-push.png)
-
-Congratulations! You've done all the basics! Feel free to use the tutorial repository to learn more, test, experiment, and expand your knowledge. You can jump into the [Bitbucket 101](https://confluence.atlassian.com/x/cgozDQ) after the *Clone your repository* section. Or you can check out [Atlassian's Git site](https://www.atlassian.com/git/) and learn more about Git workflows. 
-
-All of us at Bitbucket and SourceTree hope your experience is a great one! We are constantly working and building a better Bitbucket and SourceTree. 
-
-- - -
-
-#Command line
-  
-Learn the very basics of cloning, committing, and pushing from the command line. Git is a very effective from the command line and it's commands are reasonably easy to learn.
-
-**If you don't already have Git installed** on your local system see, [Set up Git](https://confluence.atlassian.com/x/V4DHHw), then return here. 
-
-**This section contains the following tasks: 
-
-* [Clone your repository](#markdown-header-clone-your-repository)
-* [Stage, commit, and push a change](#markdown-header-make-a-commit-and-push-the-change)
-
-If you are unfamiliar with the Git, or the Git commands here are a couple very good resources: 
-
-* [Atlassian Git cheatsheet](https://www.atlassian.com/dms/wac/images/landing/git/atlassian_git_cheatsheet.pdf): Nice crisp PDF of all the basic Git commands. 
-* [Atlassian's Git site](https://www.atlassian.com/git/)
-
-### Clone your repository:
-
-Cloning makes a local copy of the repository for you.
-
-![Clone from command line](https://confluence.atlassian.com/download/attachments/304578655/repo-setup-clone_menu-sidexpand.png)
-
-1. Click  **Clone** in Bitbucket **A**, as shown in the previous figure. 
-2. Make sure the protocol **B** is set to HTTPS, as shown in the previous figure.
-
-    Bitbucket pre-fills the clone command for you.
-    
-3. Copy the command **C**. 
-4. Open a terminal, or launch a GitBash terminal, on your local machine.
-5. Navigate to the directory where you want your files. Use the cd /path-to-your/directory command to navigate to the location you want your repository. 
-6. Paste the command **C** you copied in step 3 at the prompt.
-7. Press ENTER on your keyboard.
-The result should be something like. 
-
-Git clones your repository from Bitbucket to your local machine.
-> If you have trouble cloning from these instructions you can check out the more [detailed tutorial](https://confluence.atlassian.com/x/W4DHHw).
-
-The git clone command copies an existing Git repository as its own full-fledged Git repository with its own history, manages its own files, and is a completely isolated environment from the original repository. Cloning also creates a remote connection called origin pointing back to the original repository
-
-![Git clone](https://confluence.atlassian.com/download/attachments/304578655/git-tutorial-basics-clone.png)
-
-
-### Make a commit and push the change
-
-Learn the Git basics of stage, commit, push when you make a change to the 'sample.html' file.
-
-1.  Navigate to the directory (folder) where you cloned your repository.
-2.  Using your favorite editor, open the `sample.html` file.
-3.  Change the heading from `My First File` to `Playing in the Sand`. 
-4.  Save and close the file.
-5.  Navigate to the repository in your command line 'cd path/to/your-repository'.
-5.  Stage the file with Git.
-    
-    `git add sample.html`
-    
-6.  Commit the change.
- 
-    `git commit -m "changing sample.html"`
-    
-7. Push to Bitbucket.
-
-    `git push`
-    
-    The system prompts you for a username/password.
-    
-8. Enter your Bitbucket account name and the password.
-9. After the push completes, click **Commits**, in Bitbucket, to view your change.
-
-The 'git add' moves changes from the working directory to the staging area. This gives you the opportunity to prepare a set of changes (a snapshot) before committing it to the official history.
-
-![Git add command](https://confluence.atlassian.com/download/attachments/304578655/git-tutorial-basics-add.png)
-
-The git commit takes the staged snapshot and commits it to the project history. Combined with git add, this defines the basic workflow for all Git users.
-
-![Git commit](https://confluence.atlassian.com/download/attachments/304578655/git-tutorial-basics-commit.png)
-
-Pushing lets you move a local branch or series of commits to another repository, which serves as a convenient way to publish contributions. This is like svn commit, but it sends a series of commits instead of a single changeset.
-
-![Push graphic](https://confluence.atlassian.com/download/attachments/304578655/git-tutorial-remote-repositories-push.png)
-
-Congratulations! You've done all the basics! Feel free to use the tutorial repository to learn more, test, experiment, and expand your knowledge. You can jump into the [Bitbucket 101](https://confluence.atlassian.com/x/cgozDQ) after the *Clone your repository* section. Or you can check out [Atlassian's Git site](https://www.atlassian.com/git/) and learn more about Git workflows. 
-
-All of us at Bitbucket and SourceTree hope your experience is a great one! We are constantly working and building a better Bitbucket and SourceTree.
-
-----
-
-[lexers]: http://pygments.org/docs/lexers/
-[fireball]: http://daringfireball.net/projects/markdown/ 
-[Pygments]: http://www.pygments.org/ 
-[Extra]: http://michelf.ca/projects/php-markdown/extra/
-[id]: http://example.com/  "Optional Title Here"
-[BBmarkup]: https://confluence.atlassian.com/x/xTAvEw
+Questions, Concerns, Ideas or Anolomies, please direct to [@brian](brian@rokk3rlabs.com) or [@sean](sean@rokk3rlabs.com)
