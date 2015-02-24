@@ -1,0 +1,31 @@
+{
+  "name": "code-challenge",
+  "private": true,
+  "version": "0.0.1",
+  "description": "it makes awesome things in the console",
+  "keywords": [],
+  "dependencies": {
+    "async": "^0.9.0",
+    "axel": "0.0.3",
+    "commander": "^2.6.0",
+    "lodash": "^2.4.1",
+    "request": "^2.45.0",
+    "should": "^4.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anonymous node/sails user/r3l-node-stack.git"
+  },
+  "author": "Goye",
+  "license": "",
+  "devDependencies": {
+    "gulp": "^3.8.8",
+    "gulp-mocha": "^1.1.0",
+    "gulp-util": "^3.0.1",
+    "mocha": "^2.0.0",
+    "should": "^4.0.4"
+  },
+  "bin":{
+    "C": "canvasService.js"
+  } 
+}
