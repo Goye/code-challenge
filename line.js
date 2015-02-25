@@ -6,7 +6,8 @@
 
 var drawService  = require('./drawService'),
 	  utilsService = require('./utilsService'),
-	  ctx     	   = drawService.axel;
+	  ctx     	   = drawService.axel,
+    cursor       = drawService.cursor;
 
 module.exports = {
 	drawLine : drawLine
@@ -26,7 +27,7 @@ utilsService.getParams(description, function (err, resp){
 
 		drawLine(x1, y1, x2, y2, function (err, resp){
       if (err) return console.err(err);
-      console.log("drawn it", resp);
+      //console.log("drawn it", resp);
 		});
 });
 
@@ -38,12 +39,15 @@ utilsService.getParams(description, function (err, resp){
  * @param  {Integer} y2 
  * @return {Boolean}   
  */
-function drawLine(x1, y1, x2, y2){
+function drawLine(x1, y1, x2, y2, cb){
 
   /** drawing the line */
-  ctx.bg(0,255,0);
+  ctx.brush = "x";
   ctx.line(x1, y1, x2, y2);
+
   /** put the cursor to the end */
-  ctx.cursor.restore();
+  cursor.reset();
+  cursor.goto(0, 12);
+  cb(null, true);
 
 }

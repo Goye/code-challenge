@@ -6,7 +6,7 @@
 
 var drawService  = require('./drawService'),
 	  utilsService = require('./utilsService'),
-	  ctx     	   = drawService.axel;
+	  cursor     	 = drawService.cursor;
 
 module.exports = {
 	drawCanvas : drawCanvas
@@ -24,7 +24,7 @@ utilsService.getParams(description, function (err, resp){
 
 		drawCanvas(width, height, function (err, resp){
       if (err) return console.err(err);
-      console.log("drawn it", resp);
+      //console.log("drawn it", resp);
 		});
 });
 
@@ -37,14 +37,22 @@ utilsService.getParams(description, function (err, resp){
  */
 function drawCanvas(width, height, cb){
 
-  ctx.clear();
-  /** Blue box */
-  ctx.bg(22, 31, 88);
-  /** draw the box */
-  ctx.box(0, 0, width, height);
-  /** put the cursor to the end */
-  ctx.cursor.restore();
+  /** Clear the console */
+  console.log('\033[2J');
 
+  /** Draw the canvas */
+  for (y=0; y< height; y+=1) {
+    cursor.goto(width - 1, 0+y).write("|");
+    cursor.goto(0, 0+y).write("|");
+  }
+
+  for (x=0; x< width; x+=1) {
+    cursor.goto(0+x, height).write("-");
+    cursor.goto(0+x, 0).write("-");
+  }
+  
+  cursor.reset();
+  cursor.goto(0, height + 2);
   cb(null, true);
 
 }

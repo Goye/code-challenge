@@ -13,7 +13,7 @@ var drawService  = require('./drawService'),
 function removeCanvas (){
 
   /** Clear the console */
-  ctx.clear();
+  console.log('\033[2J');
 
 }
 

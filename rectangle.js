@@ -6,7 +6,8 @@
 
 var drawService  = require('./drawService'),
 	  utilsService = require('./utilsService'),
-	  ctx     	   = drawService.axel;
+	  ctx     	   = drawService.axel,
+    cursor       = drawService.cursor;
 
 module.exports = {
 	drawRectangle : drawRectangle
@@ -26,7 +27,7 @@ utilsService.getParams(description, function (err, resp){
 
 		drawRectangle(x1, y1, x2, y2, function (err, resp){
       if (err) return console.err(err);
-      console.log("drawn it", resp);
+      //console.log("drawn it", resp);
 		});
 });
 
@@ -38,12 +39,14 @@ utilsService.getParams(description, function (err, resp){
  * @param  {Integer} y2 
  * @return {Boolean}   
  */
-function drawRectangle(x1, y1, x2, y2){
+function drawRectangle(x1, y1, x2, y2, cb){
 
   /** draw the box */
-  ctx.bg(255,255,0);
+  ctx.brush = "x";
   ctx.box(x1, y1, x2, y2);
   /** put the cursor to the end */
-  ctx.cursor.restore();
+  cursor.reset();
+  cursor.goto(0, 12);
+  cb(null, true);
 
 }
