@@ -6,10 +6,11 @@
 
 var drawService  = require('./drawService'),
 	  utilsService = require('./utilsService'),
-	  cursor     	 = drawService.cursor;
+	  cursor     	 = drawService.cursor,
+    fs           = drawService.fs;
 
 module.exports = {
-	drawCanvas : drawCanvas
+	startCanvas : startCanvas
 }
 
 var description = "draw canvas on the console";
@@ -22,37 +23,37 @@ utilsService.getParams(description, function (err, resp){
 	var width  = resp.width || 0,
 		height = resp.height || 0;
 
-		drawCanvas(width, height, function (err, resp){
-      if (err) return console.err(err);
+		startCanvas(width, height, function (err, resp){
+      if (err) throw err;
       //console.log("drawn it", resp);
 		});
 });
 
 
 /**
- * This function draw the canvas on the console
+ * This function make the logic to draw canvas
  * @param  {Integer} width  
  * @param  {Integer} height 
  * @return {Boolean} cb    
  */
-function drawCanvas(width, height, cb){
+function startCanvas(width, height, cb){
 
-  /** Clear the console */
-  console.log('\033[2J');
-
-  /** Draw the canvas */
-  for (y=0; y< height; y+=1) {
-    cursor.goto(width - 1, 0+y).write("|");
-    cursor.goto(0, 0+y).write("|");
+  var canvasObj = {
+    width: width,
+    height: height,
+    type: 'canvas'
   }
 
-  for (x=0; x< width; x+=1) {
-    cursor.goto(0+x, height).write("-");
-    cursor.goto(0+x, 0).write("-");
-  }
+  /** Draw */
+  drawService.drawInConsole(canvasObj);
+  /** write file */
+  utilsService.writeFile({
+    "canvas": canvasObj
+  }, function(err, resp){
+    if (err) throw err;
+    /** put the cursor to the end */
+    drawService.resetCursor();
+    cb(null, true);
+  });
   
-  cursor.reset();
-  cursor.goto(0, height + 2);
-  cb(null, true);
-
 }

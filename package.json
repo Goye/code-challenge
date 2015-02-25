@@ -19,11 +19,11 @@
   },
   "author": "Goye",
   "license": "",
-  "bin":{
+  "bin": {
     "C": "canvas.js",
     "L": "line.js",
     "R": "rectangle.js",
     "B": "drawService.js",
     "Q": "quit.js"
-  } 
+  }
 }

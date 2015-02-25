@@ -10,7 +10,7 @@ var drawService  = require('./drawService'),
     cursor       = drawService.cursor;
 
 module.exports = {
-	drawRectangle : drawRectangle
+	startRectangle : startRectangle
 }
 
 var description = "draw rectangle on the console";
@@ -25,28 +25,24 @@ utilsService.getParams(description, function (err, resp){
       x2  = resp.secondlevelX || 0,
       y2  = resp.secondlevelY || 0;
 
-		drawRectangle(x1, y1, x2, y2, function (err, resp){
-      if (err) return console.err(err);
+		startRectangle(x1, y1, x2, y2, function (err, resp){
+      if (err) throw err;
       //console.log("drawn it", resp);
 		});
 });
 
 /**
- * This function draw a rectangle on the current canvas
+ * This function make the logic to draw a rectangle
  * @param  {Integer} x1 
  * @param  {Integer} y1 
  * @param  {Integer} x2 
  * @param  {Integer} y2 
  * @return {Boolean}   
  */
-function drawRectangle(x1, y1, x2, y2, cb){
+function startRectangle(x1, y1, x2, y2, cb){
 
-  /** draw the box */
-  ctx.brush = "x";
-  ctx.box(x1, y1, x2, y2);
   /** put the cursor to the end */
-  cursor.reset();
-  cursor.goto(0, 12);
+  drawService.resetCursor();
   cb(null, true);
 
 }

@@ -5,10 +5,13 @@
  */
 
 var drawService = require('./drawService'),
-	program     = drawService.commander;
+	program     = drawService.commander,
+	fs          = drawService.fs;
 
 module.exports = {
-	getParams: getParams
+	getParams: getParams,
+	paramsValidations: paramsValidations,
+	writeFile: writeFile
 }
 
 /**
@@ -33,9 +36,46 @@ function getParams (description, cb){
 	if (process.argv.length <= 2){
 		program.help();
 	} else{ 
-		cb(null, program);
+
+		if(!paramsValidations(process.argv)){
+			console.error("The numbers cannot be less than 0");
+		}else{
+			cb(null, program);
+		}
+		
 	}
 
+}
+
+/**
+ * This function validates the current values
+ * @param  {arg} arguments 
+ * @return {Boolean}  
+ */
+function paramsValidations(arg){
+	//var stringValidation = /^[\w]+$/.test(c);
+	var isNatural = true;
+	for (var i in arg){
+		var value = parseInt(arg[i]);
+		if(!isNaN(value)){
+			isNatural = isNatural && value >= 0;
+		}
+	}
+	return isNatural;
+}
+
+/**
+ * create the file with the current object
+ * @param  {Object}   Object 
+ * @return {Boolean} cb   
+ */
+function writeFile(Object, cb){
+
+	 /** write file */
+  	fs.writeFile('./data/localStorage.json', JSON.stringify(Object), function (err) {
+    	if (err) return cb(err);
+    	cb(null, true)
+    });
 }
 
 
