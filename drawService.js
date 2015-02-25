@@ -102,10 +102,10 @@ function drawCanvas(params){
  */
 function drawLine(params){
 
-	var x1 = params.x || 0,
-		y1 = params.y || 0,
-		x2 = params.X || 0,
-		y2 = params.Y || 0;
+	var x1 = params.x || 2,
+		y1 = params.y || 2,
+		x2 = params.X || 2,
+		y2 = params.Y || 2;
 
 	/** Drawing the line */
     axel.brush = "x";
@@ -119,10 +119,10 @@ function drawLine(params){
  */
 function drawRectangle(params){
 
-	var x1 = params.x1 || 0,
-		y1 = params.y1 || 0,
-		x2 = params.x2 || 0,
-		y2 = params.y2 || 0;
+	var x1 = params.x1 || 2,
+		y1 = params.y1 || 2,
+		x2 = params.x2 || 2,
+		y2 = params.y2 || 2;
 	/** draw the box */
 	ctx.brush = "x";
 	ctx.box(x1, y1, x2, y2);
