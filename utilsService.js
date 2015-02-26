@@ -32,7 +32,7 @@ function getParams (description, cb){
 	.option('-Y, --secondlevelY <n>', 'y2 space', parseInt)
 	.option('-c, --colour <n>', 'colour param')
 	.parse(process.argv);
-
+	
 	if (process.argv.length <= 2){
 		program.help();
 	} else{ 

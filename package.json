@@ -23,7 +23,7 @@
     "C": "canvas.js",
     "L": "line.js",
     "R": "rectangle.js",
-    "B": "drawService.js",
+    "B": "fillArea.js",
     "Q": "quit.js"
   }
 }

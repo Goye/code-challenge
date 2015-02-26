@@ -1,9 +1,9 @@
 module.exports = {
-  width: 12,
-  height: 12, 
-  firstLevelX: 0,
-  firstLevelY:0,
-  secondlevelX: 10, 
-  secondlevelY: 0, 
-  colour: "o"
+  width: 40,
+  height: 10, 
+  x: 60,
+  y:60,
+  X: 70, 
+  Y: 70, 
+  colour: "u"
 }

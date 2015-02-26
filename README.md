@@ -13,13 +13,14 @@ It's necessary have some node version in your computer
 
 Run the command as:
 
-1. C -w `number` -h `number` -> Draw the canvas on the console
-2. L -x `number` -y `number` -X `number` -Y `number` -> Draw the line on the console
-3. R -x `number` -y `number` -X `number` -Y `number` -> Draw the rectangle on the console
-4. Q -> Quit of the application 
+1. `C -w <n> -h <n>` -> Draw the canvas on the console
+2. `L -x <n> -y <n> -X <n> -Y <n>` -> Draw the line on the console
+3. `R -x <n> -y <n> -X <n> -Y <n>` -> Draw the rectangle on the console
+4. `B -w <n> -h <n> -c <s>` -> Fill the canvas in the console
+4. `Q` -> Quit of the application 
 
 ## Testing
-In construction 
+Run with the command mocha in the console
 
 ## Stack Objectives
 

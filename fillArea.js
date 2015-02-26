@@ -12,38 +12,36 @@ var drawService  = require('./drawService'),
     _            = drawService._;
 
 module.exports = {
-	startRectangle : startRectangle
+	startFill : startFill
 }
 
-var description = "draw rectangle on the console";
+var description = "fill an area in the console";
 
 /**
  * Get the params on the console
  */
 utilsService.getParams(description, function (err, resp){
 
-	var x1  = resp.firstLevelX || 0,
-		  y1  = resp.firstLevelY || 0,
-      x2  = resp.secondlevelX || 0,
-      y2  = resp.secondlevelY || 0;
+	var width   = resp.width || 0,
+		  height  = resp.height || 0,
+      colour  = resp.colour || 'o';
 
-		startRectangle(x1, y1, x2, y2, function (err, resp){
+		startFill(width, height, colour, function (err, resp){
       if (err) return console.error(err);
       //console.log("drawn it", resp);
 		});
 });
 
 /**
- * This function make the logic to draw a rectangle
- * @param  {Integer} x1 
- * @param  {Integer} y1 
- * @param  {Integer} x2 
- * @param  {Integer} y2 
+ * This function make the logic to fill an area
+ * @param  {Integer} width 
+ * @param  {Integer} height 
+ * @param  {String}  colour 
  * @return {Boolean}   
  */
-function startRectangle(x1, y1, x2, y2, cb){
+function startFill(width, height, colour, cb){
 
-  /** put the cursor to the end */
+  /** Read the file */
   fs.readFile('./data/localStorage.json', function (err, data) {
     if (err) return console.error("it's necessary have a drawing canvas");
     var data  = _.isEmpty(data) ? {} : JSON.parse(data);
@@ -51,17 +49,18 @@ function startRectangle(x1, y1, x2, y2, cb){
     if(!_.isEmpty(data.canvas)){
       
       /** fix the limits */
-      drawService.drawRectangleLimits(data.canvas, x1, y1, x2, y2, function (x1, y1, x2, y2){
+      drawService.drawAreaLimits(data.canvas, width, height, function (width, height){
 
-        var rectangleObj = {
-          x: x1,
-          y: y1,
-          X: x2,
-          Y: y2,
-          type: 'rectangle'
-        }
         /** hierarchy for canvas */
         drawService.drawInConsole(data.canvas);
+        /** fill the area */
+        var toFill = {
+          width: width,
+          height: height,
+          colour: colour,
+          type: 'fill'
+        }
+        drawService.drawInConsole(toFill);
         /** let's do the line or lines */
         if(!_.isEmpty(data.line)){
 
@@ -79,18 +78,25 @@ function startRectangle(x1, y1, x2, y2, cb){
 
         }
         /** let's do the rectangle */
-        drawService.drawStoreItem(rectangleObj, data.rectangle, 'rectangle', function(rectangleArray){
+        if(!_.isEmpty(data.rectangle)){
 
-          data.rectangle = rectangleArray;
-          /** Save the line in the file */
-          utilsService.writeFile(data, function(err, resp){
-            if (err) return console.error(err);
-            /** put the cursor to the end */
-            drawService.resetCursor();
-            cb(null, true);
-          });
+          for (var i in data.rectangle){
 
-        });
+             var toDraw = {
+                x: data.rectangle[i].x,
+                y: data.rectangle[i].y,
+                X: data.rectangle[i].X,
+                Y: data.rectangle[i].Y,
+                type: 'rectangle'
+             }
+             drawService.drawInConsole(toDraw);
+          }
+
+        }
+
+        /** put the cursor to the end */
+        drawService.resetCursor();
+        cb(null, true);
         
       });  
 

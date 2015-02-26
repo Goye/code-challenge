@@ -24,7 +24,7 @@ utilsService.getParams(description, function (err, resp){
 		height = resp.height || 0;
 
 		startCanvas(width, height, function (err, resp){
-      if (err) throw err;
+      if (err) return console.error(err);
       //console.log("drawn it", resp);
 		});
 });
@@ -50,7 +50,7 @@ function startCanvas(width, height, cb){
   utilsService.writeFile({
     "canvas": canvasObj
   }, function(err, resp){
-    if (err) throw err;
+    if (err) return console.error(err);
     /** put the cursor to the end */
     drawService.resetCursor();
     cb(null, true);

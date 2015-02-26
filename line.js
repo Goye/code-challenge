@@ -12,8 +12,7 @@ var drawService  = require('./drawService'),
     _            = drawService._;
 
 module.exports = {
-	startLine : startLine,
-  lineLimits : lineLimits
+	startLine : startLine
 }
 
 var description = "draw line on the console";
@@ -29,7 +28,7 @@ utilsService.getParams(description, function (err, resp){
       y2  = resp.secondlevelY || 2;
 
 		startLine(x1, y1, x2, y2, function (err, resp){
-      if (err) throw err;
+      if (err) return console.error(err);
       //console.log("drawn it", resp);
 		});
 });
@@ -45,14 +44,13 @@ utilsService.getParams(description, function (err, resp){
 function startLine(x1, y1, x2, y2, cb){
 
   fs.readFile('./data/localStorage.json', function (err, data) {
-    if (err) throw err;
-    var data       = data ? JSON.parse(data) : {},
-        linesArray = [];
+    if (err) return console.error("it's necessary have a drawing canvas");
+    var data = _.isEmpty(data) ? {} : JSON.parse(data);
 
     if(!_.isEmpty(data.canvas)){
       
       /** fix the limits */
-      lineLimits(data.canvas, x1, y1, x2, y2, function (x1, y1, x2, y2){
+      drawService.drawLineLimits(data.canvas, x1, y1, x2, y2, function (x1, y1, x2, y2){
 
         var lineObj = {
           x: x1,
@@ -64,83 +62,23 @@ function startLine(x1, y1, x2, y2, cb){
         /** hierarchy for canvas */
         drawService.drawInConsole(data.canvas);
         /** let's do the line or lines */
-        if(!_.isEmpty(data.line)){
+        drawService.drawStoreItem(lineObj, data.line, 'line', function(linesArray){
 
-          linesArray = data.line;
-          delete lineObj.type;
-          linesArray.push(lineObj);
-          /** Remove repeated */
-          linesArray = _.uniq(linesArray, function(line) { 
-            return _.find(linesArray, { 'x': line.x, 'y': line.y, 'X': line.X, 'Y': line.Y });
+          data.line = linesArray;
+          /** Save the line in the file */
+          utilsService.writeFile(data, function(err, resp){
+            if (err) return console.error(err);
+            /** put the cursor to the end */
+            drawService.resetCursor();
+            cb(null, true);
           });
 
-          for (var i in linesArray){
-
-             var toDraw = {
-                x: linesArray[i].x,
-                y: linesArray[i].y,
-                X: linesArray[i].X,
-                Y: linesArray[i].Y,
-                type: 'line'
-             }
-             drawService.drawInConsole(toDraw);
-          }
-
-        }else{
-
-          drawService.drawInConsole(lineObj);
-          linesArray.push(lineObj);
-
-        }
-        data.line = linesArray;
-        /** Save the line in the file */
-        utilsService.writeFile(data, function(err, resp){
-          if (err) throw err;
-          /** put the cursor to the end */
-          drawService.resetCursor();
-          cb(null, true);
         });
         
       });  
 
-    }else{
-
-      console.err("it's necessary have a drawing canvas");
-      cb(true);
-
     }
     
   });  
-
-}
-
-/**
- * Fix the limits using the current canvas
- * @param  {Integer}  x1 
- * @param  {Integer}  y1 
- * @param  {Integer}  x2 
- * @param  {Integer}  y2
- */
-function lineLimits(canvas, x1, y1, x2, y2, cb){
-
-  x1 < 2 ? x1 = 2 : x1;
-  x2 < 2 ? x2 = 2 : x2;
-  y1 < 2 ? y1 = 2 : y1;
-  y2 < 2 ? y2 = 2 : y2;
-
-  if (x1 >= canvas.width ){
-    x1 = canvas.width - 2;
-  } 
-  if (x2 >= canvas.width ){
-    x2 = canvas.width - 2;
-  }
-  if(y1 >= canvas.height){
-    y1 = canvas.height - 2;
-  }
-  if(y2 >= canvas.height){
-    y2 = canvas.height - 2;
-  }
-
-  cb(x1, y1, x2, y2);
 
 }
