@@ -30,4 +30,4 @@ Run with the command mocha in the console
 4. Should fill the entire area connected to (x,y) with "colour" c. The behaviour of this is the same as that of the "bucket fill" tool in paint programs.
 5. Q Should quit the program.  
 
-Questions, Concerns, Ideas or Anolomies, please direct to [@Goye-says] or [@Goye](karlos.goye@gmail.com or karlos.goye92@hotmail.com)
+Questions, Concerns, Ideas or Anolomies, please direct to [@Goye-says](karlos.goye@gmail.com or karlos.goye92@hotmail.com)
